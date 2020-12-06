@@ -1,0 +1,38 @@
+.error {
+   	color: red;
+}
+
+table {
+    border: 2px solid;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 2px solid;
+}
+
+th {
+    background-color: rgb(128, 255, 255);
+}
+
+label{
+   display: inline-block;
+   width: 10em;
+   text-align: right;
+   margin: 0.25em;
+   font-weight: bold;
+}
+
+input[type="submit"] {
+   width: 100px;
+   height:30px;
+   border: 1px solid rgb(192, 192, 192);
+}
+
+p{
+  display: table;
+}
+
+span{
+    display: table-cell;
+}
