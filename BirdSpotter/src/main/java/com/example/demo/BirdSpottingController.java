@@ -13,7 +13,7 @@ public class BirdSpottingController {
 	@Autowired
 	private SpottedBirdService spottedBirdService;
 
-	@GetMapping("/locationsall")
+	@GetMapping("/birdspotting")
 	public String SpottingLocations(Model model) {
 		model.addAttribute("locations", spottedBirdService.findAll());
 		return "allLocationsView";
