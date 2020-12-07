@@ -12,9 +12,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		//http.httpBasic();
-		http.formLogin().defaultSuccessUrl("/birdspotting", true);
+		http.formLogin()
+			.defaultSuccessUrl("/birdspotting", true);
+			//.loginPage("/login").permitAll();
+		
 		http.authorizeRequests()
-			.antMatchers("/*").hasRole("SPOTTER");
+			.antMatchers("/*").hasRole("SPOTTER")
+			.antMatchers("*/newbirdspotting").hasRole("ADMIN")
+			.anyRequest().permitAll()
+			.and()
+			.formLogin().loginPage("/login").permitAll()
+			.and()
+			.exceptionHandling().accessDeniedPage("/403")
+			.and().csrf();
 	}
 	
 	@Override
