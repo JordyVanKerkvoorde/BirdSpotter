@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Login</title>
 <link href="../resources/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body onload='document.loginForm.username.focus();'>

@@ -8,6 +8,6 @@
 <link href="../resources/css/style.css">
 </head>
 <body>
-
+	<h1>Overview of spotted birds in </h1>
 </body>
 </html>
