@@ -32,7 +32,7 @@ public class BirdSpottingController {
 	public String SpotLocation(@PathVariable("id") String name, Model model) {
 		Optional<BirdSpotLocation> spot = spottedBirdService.findByName(name);
 		
-		if(spot.isPresent()) {
+		if(!spot.isPresent()) {
 			return "redirect:/birdspotting";
 		}
 		
