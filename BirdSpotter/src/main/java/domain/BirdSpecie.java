@@ -6,7 +6,11 @@ public class BirdSpecie {
     private Integer yearOfDiscovery;
 	
     private String code;
-		
+	
+    public BirdSpecie() {
+    	
+    }
+    
 	public BirdSpecie(String name, Integer yearOfDiscovery, String code) {
 		super();
 		this.name = name;
