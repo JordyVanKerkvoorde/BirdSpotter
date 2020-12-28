@@ -10,8 +10,7 @@
 </head>
 <body>
 	<h1>Create new bird specie:</h1>
-	<h1>Overview of spotted birds in ${location.name}</h1>
-	<form:form method="post" action="/birdspotting/${location.name}/create-new-spotting" modelAttribute="bird">
+	<form:form method="post" action="/birdspotting/${location.name}/create-new-spotting" modelAttribute="birdSpecie">
 		<form:errors path="*" element="div"/>
 		<p>
 		<form:label path="name">Specie:</form:label>

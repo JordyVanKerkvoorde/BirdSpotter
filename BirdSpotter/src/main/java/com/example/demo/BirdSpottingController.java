@@ -2,6 +2,8 @@ package com.example.demo;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +19,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import domain.BirdSpecie;
 import domain.BirdSpotLocation;
 import service.SpottedBirdService;
+import validator.NewSpotValidator;
 
 @Controller	
 @RequestMapping("/birdspotting")
 public class BirdSpottingController {
 
+	@Autowired
+	private NewSpotValidator newSpotValidator;
+	
 	@Autowired
 	private SpottedBirdService spottedBirdService;
 
@@ -54,21 +60,27 @@ public class BirdSpottingController {
 		}
 		
 		BirdSpecie specie = new BirdSpecie();
-		model.addAttribute("bird", specie);
+		model.addAttribute("birdSpecie", specie);
 		model.addAttribute("location", spot.get());
 		
 		return "newSpottingView";
 	}
 	
 	@PostMapping("/{id}/create-new-spotting")
-	public String spotNewBird(@PathVariable(value="id") String name, @ModelAttribute BirdSpecie bird, BindingResult result, Model model) {
+	public String spotNewBird(@PathVariable(value="id") String name, @Valid BirdSpecie birdSpecie, BindingResult result, Model model) {
+		newSpotValidator.validate(birdSpecie, result);
+		
+		if(result.hasErrors()) {
+			return "newSpottingView";
+		}
+		
 		Optional<BirdSpotLocation> spot = spottedBirdService.findByName(name);
 		
 		if(!spot.isPresent()) {
 			return "redirect:/birdspotting";
 		}
 		
-		spot.get().newBirdSpot(bird);
+		spot.get().newBirdSpot(birdSpecie);
 		return "redirect:/birdspotting";
 	}
 	

@@ -6,9 +6,14 @@ import org.springframework.context.annotation.Bean;
 
 import service.SpottedBirdService;
 import service.SpottedBirdServiceImpl;
+import validator.NewSpotValidator;
 
 @SpringBootApplication
 public class BirdSpotterApplication {
+	@Bean
+	public NewSpotValidator newSpotValidation() {
+		return new NewSpotValidator();
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(BirdSpotterApplication.class, args);
@@ -19,17 +24,5 @@ public class BirdSpotterApplication {
 		return new SpottedBirdServiceImpl();
 	}
 	
-//	@Bean
-//	public ServletContextInitializer servletContextInitializer() {
-//		return new ServletContextInitializer() {
-//			@Override
-//			public void onStartup(ServletContext servletContext) throws ServletException{
-//				servletContext.setSessionTrackingModes(
-//						Collections.singleton(SessionTrackingMode.COOKIE));
-//				SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
-//				sessionCookieConfig.setHttpOnly(true);
-//			} 
-//		}; 
-//	}
 
 }
