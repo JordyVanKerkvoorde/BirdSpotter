@@ -70,17 +70,19 @@ public class BirdSpottingController {
 	public String spotNewBird(@PathVariable(value="id") String name, @Valid BirdSpecie birdSpecie, BindingResult result, Model model) {
 		newSpotValidator.validate(birdSpecie, result);
 		
+		
 		if(result.hasErrors()) {
 			return "newSpottingView";
 		}
 		
 		Optional<BirdSpotLocation> spot = spottedBirdService.findByName(name);
 		
-		if(!spot.isPresent()) {
+		if(spot.isEmpty()) {
 			return "redirect:/birdspotting";
 		}
 		
-		spot.get().newBirdSpot(birdSpecie);
+		spot.get().increaseBirdSpot(birdSpecie);
+		
 		return "redirect:/birdspotting";
 	}
 	
