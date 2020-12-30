@@ -14,12 +14,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//http.httpBasic();
 		http.formLogin()
 			.defaultSuccessUrl("/birdspotting", true);
-			//.loginPage("/login").permitAll();
 		
 		http.authorizeRequests()
-			.antMatchers("/*").hasRole("SPOTTER")
-			.antMatchers("*/newbirdspotting").hasRole("ADMIN")
-			.anyRequest().permitAll()
+			.antMatchers("/birds-spotted/**").permitAll()
+			.antMatchers("/**/create-new-spotting").hasRole("ADMIN")
+			.antMatchers("/**").hasRole("SPOTTER")
 			.and()
 			.formLogin().loginPage("/login").permitAll()
 			.and()

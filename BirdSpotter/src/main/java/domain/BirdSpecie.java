@@ -10,15 +10,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class BirdSpecie {
-	@NotEmpty
+	@NotEmpty(message="{required.name}")
 	private String name;
 
-	@NotNull
-	@DecimalMin(value = "1250", message = "The earliest year of discovery allowed is 1250")
+	@NotNull(message="{required.yearOfDiscovery}")
+	@DecimalMin(value = "1250", message = "{yearOfDiscovery.minError}")
     private Integer yearOfDiscovery;
 
-	@NotEmpty
-	@Pattern(regexp = "^[A-Z]{1,2}[0-9]{3}", message = "Code should start with one or two capital letters [A-Z] followed by 3 digits.")
+	@NotEmpty(message="{required.code}")
+	@Pattern(regexp = "^[A-Z]{1,2}[0-9]{3}", message = "{code.formatError}")
     private String code;
 	
     public BirdSpecie() {

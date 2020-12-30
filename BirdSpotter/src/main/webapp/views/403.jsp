@@ -8,6 +8,9 @@
 </head>
 <body>
 <h1>HTTP Status 403 - Access is denied</h1>
-<button>Log out</button>
+<form action='login?logout' method='post'>
+		<input type="submit" value="Log out" />
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>            
+</form>
 </body>
 </html>

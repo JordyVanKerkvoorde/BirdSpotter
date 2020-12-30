@@ -1,5 +1,7 @@
 package validator;
 
+import java.time.Year;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -16,14 +18,11 @@ public class NewSpotValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		BirdSpecie bird = (BirdSpecie) target;
-		
-//		ValidationUtils.rejectIfEmpty(errors, "name", "required.name", "may not be empty");
-//		
-//		
-//		String name = bird.getName();
-//		if(name.isBlank() || name == null) {
-//			errors.rejectValue("name",  "");
-//		}
+		if(bird.getYearOfDiscovery() != null) {
+			if(bird.getYearOfDiscovery() > Year.now().getValue()) {
+				errors.rejectValue("yearOfDiscovery", "yearOfDiscovery.future","You cannot discover birds in the future!");
+			}
+		}
 	}
 
 }

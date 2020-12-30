@@ -62,20 +62,22 @@ public class BirdSpottingController {
 		BirdSpecie specie = new BirdSpecie();
 		model.addAttribute("birdSpecie", specie);
 		model.addAttribute("location", spot.get());
+		model.addAttribute("globalError", "");
 		
 		return "newSpottingView";
 	}
 	
 	@PostMapping("/{id}/create-new-spotting")
 	public String spotNewBird(@PathVariable(value="id") String name, @Valid BirdSpecie birdSpecie, BindingResult result, Model model) {
+		Optional<BirdSpotLocation> spot = spottedBirdService.findByName(name);
+		model.addAttribute("birdSpecie", birdSpecie);
+		model.addAttribute("location", spot.get());
+		
 		newSpotValidator.validate(birdSpecie, result);
-		
-		
 		if(result.hasErrors()) {
+			model.addAttribute("globalError", "Please review entered data ...");
 			return "newSpottingView";
 		}
-		
-		Optional<BirdSpotLocation> spot = spottedBirdService.findByName(name);
 		
 		if(spot.isEmpty()) {
 			return "redirect:/birdspotting";
